@@ -5,11 +5,14 @@ public class ShootingScript : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float bulletSpeed = 10f;
-    public float bulletLifetime = 10f; // Time in seconds before the bullet is destroyed
+    public float bulletLifetime = 10f;
+
+    public AudioSource sfxAudioSource;
+    public ParticleSystem shootingEffect; // Particle System for visual effects
+    public Transform vfxSpawnPosition; // Drag and drop the VFX spawn position in the editor
 
     void Update()
     {
-        // Check for left mouse click
         if (Input.GetButtonDown("Fire1"))
         {
             Shoot();
@@ -35,5 +38,18 @@ public class ShootingScript : MonoBehaviour
 
         // Destroy the bullet after a specified lifetime
         Destroy(bullet, bulletLifetime);
+
+        // Play the SFX when shooting
+        if (sfxAudioSource != null)
+        {
+            sfxAudioSource.Play();
+        }
+
+        // Spawn the shooting effect at the specified spawn position
+        if (shootingEffect != null && vfxSpawnPosition != null)
+        {
+            shootingEffect.transform.position = vfxSpawnPosition.position;
+            shootingEffect.Play();
+        }
     }
 }
