@@ -51,5 +51,6 @@ public class ShootingScript : MonoBehaviour
             shootingEffect.transform.position = vfxSpawnPosition.position;
             shootingEffect.Play();
         }
+
     }
 }
